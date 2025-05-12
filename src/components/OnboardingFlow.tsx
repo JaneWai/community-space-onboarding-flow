@@ -81,8 +81,8 @@ export const OnboardingFlow: React.FC<OnboardingFlowProps> = ({ onComplete, onCa
       case 2:
         return (
           <InterestsStep 
-            selectedInterests={userData.interests}
-            updateInterests={(interests) => updateUserData({ interests })}
+            userData={userData}
+            updateUserData={updateUserData}
             onNext={handleNext}
             onBack={handleBack}
             onCancel={handleCancel}

@@ -21,19 +21,141 @@ export const InterestsStep: React.FC<InterestsStepProps> = ({
   const interestCategories = [
     {
       name: 'Development',
-      options: ['Web Development', 'Mobile Apps', 'Game Development', 'AI & Machine Learning', 'Blockchain']
+      options: [
+        'Web Development', 
+        'Mobile Apps', 
+        'Game Development', 
+        'AI & Machine Learning', 
+        'Blockchain',
+        'DevOps',
+        'Backend Development',
+        'Frontend Development',
+        'Cloud Computing',
+        'Cybersecurity',
+        'Data Science',
+        'IoT',
+        'AR/VR Development'
+      ]
     },
     {
       name: 'Design',
-      options: ['UI/UX Design', 'Graphic Design', '3D Modeling', 'Animation', 'Illustration']
+      options: [
+        'UI/UX Design', 
+        'Graphic Design', 
+        '3D Modeling', 
+        'Animation', 
+        'Illustration',
+        'Product Design',
+        'Motion Graphics',
+        'Typography',
+        'Brand Identity',
+        'Design Systems',
+        'Web Design',
+        'Game Design',
+        'Interaction Design'
+      ]
     },
     {
       name: 'Business',
-      options: ['Startups', 'Marketing', 'Product Management', 'Entrepreneurship', 'Freelancing']
+      options: [
+        'Startups', 
+        'Marketing', 
+        'Product Management', 
+        'Entrepreneurship', 
+        'Freelancing',
+        'E-commerce',
+        'Growth Hacking',
+        'Business Strategy',
+        'Sales',
+        'Finance',
+        'Venture Capital',
+        'Business Analytics',
+        'Remote Work'
+      ]
     },
     {
       name: 'Content',
-      options: ['Writing', 'Video Production', 'Podcasting', 'Social Media', 'Blogging']
+      options: [
+        'Writing', 
+        'Video Production', 
+        'Podcasting', 
+        'Social Media', 
+        'Blogging',
+        'Content Strategy',
+        'Technical Writing',
+        'Copywriting',
+        'Content Marketing',
+        'Storytelling',
+        'Newsletter Creation',
+        'SEO',
+        'Community Building'
+      ]
+    },
+    {
+      name: 'Creative',
+      options: [
+        'Photography',
+        'Music Production',
+        'Film Making',
+        'Digital Art',
+        'Creative Writing',
+        'Crafting',
+        'Fashion Design',
+        'Interior Design',
+        'Sculpture',
+        'Painting',
+        'Performing Arts',
+        'Culinary Arts'
+      ]
+    },
+    {
+      name: 'Technology',
+      options: [
+        'Artificial Intelligence',
+        'Robotics',
+        'Quantum Computing',
+        'Biotechnology',
+        'Nanotechnology',
+        'Space Technology',
+        'Clean Tech',
+        'Wearable Tech',
+        'Smart Home',
+        'Cryptocurrency',
+        'NFTs',
+        'Metaverse'
+      ]
+    },
+    {
+      name: 'Education',
+      options: [
+        'Online Learning',
+        'EdTech',
+        'Teaching',
+        'Curriculum Development',
+        'Language Learning',
+        'STEM Education',
+        'Lifelong Learning',
+        'Educational Psychology',
+        'Academic Research',
+        'Mentoring',
+        'Coaching'
+      ]
+    },
+    {
+      name: 'Health & Wellness',
+      options: [
+        'Mental Health',
+        'Fitness',
+        'Nutrition',
+        'Meditation',
+        'Healthcare Tech',
+        'Telemedicine',
+        'Biohacking',
+        'Sleep Science',
+        'Yoga',
+        'Personal Development',
+        'Mindfulness'
+      ]
     }
   ]
 
@@ -54,8 +176,8 @@ export const InterestsStep: React.FC<InterestsStepProps> = ({
   }
 
   return (
-    <div>
-      <div className="absolute top-4 right-4">
+    <div className="max-h-[70vh] overflow-y-auto pr-2">
+      <div className="sticky top-0 right-4 z-10 float-right">
         <button 
           onClick={onCancel}
           className="text-gray-400 hover:text-gray-600 transition-colors"
@@ -72,7 +194,7 @@ export const InterestsStep: React.FC<InterestsStepProps> = ({
       
       <div className="space-y-6 mb-8">
         {interestCategories.map((category) => (
-          <div key={category.name}>
+          <div key={category.name} className="pb-4 border-b border-gray-100 last:border-0">
             <h3 className="font-medium text-gray-900 mb-3">{category.name}</h3>
             <div className="flex flex-wrap gap-3">
               {category.options.map((interest) => {
@@ -98,7 +220,7 @@ export const InterestsStep: React.FC<InterestsStepProps> = ({
         ))}
       </div>
       
-      <div className="flex justify-between">
+      <div className="sticky bottom-0 bg-white py-3 flex justify-between">
         <div className="flex space-x-2">
           <button
             type="button"
@@ -118,14 +240,19 @@ export const InterestsStep: React.FC<InterestsStepProps> = ({
           </button>
         </div>
         
-        <button
-          type="button"
-          onClick={handleContinue}
-          className="flex items-center bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-6 rounded-lg transition-colors"
-        >
-          Continue
-          <ArrowRight className="ml-2 h-5 w-5" />
-        </button>
+        <div className="flex items-center">
+          <span className="mr-3 text-sm text-gray-500">
+            {userData.interests.length} selected
+          </span>
+          <button
+            type="button"
+            onClick={handleContinue}
+            className="flex items-center bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-6 rounded-lg transition-colors"
+          >
+            Continue
+            <ArrowRight className="ml-2 h-5 w-5" />
+          </button>
+        </div>
       </div>
     </div>
   )

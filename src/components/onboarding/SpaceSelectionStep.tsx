@@ -1,20 +1,17 @@
-import React, { useMemo } from 'react'
-import { ArrowRight, ArrowLeft, Users, Star, Plus, Check, X } from 'lucide-react'
+import React from 'react'
+import { ArrowRight, ArrowLeft, Users, Plus, Check, X, CheckCircle } from 'lucide-react'
 
 interface SpaceSelectionStepProps {
-  userData: {
-    interests: string[]
-    spaces: string[]
-  }
-  updateUserData: (data: Partial<{ spaces: string[] }>) => void
+  selectedSpaces: string[]
+  updateSpaces: (spaces: string[]) => void
   onNext: () => void
   onBack: () => void
   onCancel: () => void
 }
 
 export const SpaceSelectionStep: React.FC<SpaceSelectionStepProps> = ({ 
-  userData, 
-  updateUserData, 
+  selectedSpaces, 
+  updateSpaces, 
   onNext, 
   onBack,
   onCancel
@@ -71,26 +68,17 @@ export const SpaceSelectionStep: React.FC<SpaceSelectionStepProps> = ({
     }
   ]
 
-  // Filter spaces based on user interests
-  const recommendedSpaces = useMemo(() => {
-    if (userData.interests.length === 0) return allSpaces
-    
-    return allSpaces.filter(space => 
-      space.tags.some(tag => userData.interests.includes(tag))
-    )
-  }, [userData.interests])
-
   const toggleSpace = (spaceId: string) => {
-    const newSpaces = userData.spaces.includes(spaceId)
-      ? userData.spaces.filter(id => id !== spaceId)
-      : [...userData.spaces, spaceId]
+    const newSpaces = selectedSpaces.includes(spaceId)
+      ? selectedSpaces.filter(id => id !== spaceId)
+      : [...selectedSpaces, spaceId]
     
-    updateUserData({ spaces: newSpaces })
+    updateSpaces(newSpaces)
   }
 
   return (
-    <div>
-      <div className="absolute top-4 right-4">
+    <div className="max-h-[80vh] overflow-y-auto">
+      <div className="sticky top-0 right-4 z-10 flex justify-end">
         <button 
           onClick={onCancel}
           className="text-gray-400 hover:text-gray-600 transition-colors"
@@ -102,12 +90,12 @@ export const SpaceSelectionStep: React.FC<SpaceSelectionStepProps> = ({
       
       <h2 className="text-2xl font-bold text-gray-900 mb-2">Join Community Spaces</h2>
       <p className="text-gray-600 mb-6">
-        Based on your interests, we've recommended some spaces you might enjoy. Join spaces to connect with like-minded people.
+        Based on your interests, we've recommended some spaces you might enjoy. Join spaces to connect with like-minded people or skip this step.
       </p>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-        {recommendedSpaces.map((space) => {
-          const isSelected = userData.spaces.includes(space.id)
+        {allSpaces.map((space) => {
+          const isSelected = selectedSpaces.includes(space.id)
           
           return (
             <div 
@@ -162,34 +150,51 @@ export const SpaceSelectionStep: React.FC<SpaceSelectionStepProps> = ({
         })}
       </div>
       
-      <div className="flex justify-between">
-        <div className="flex space-x-2">
-          <button
-            type="button"
-            onClick={onBack}
-            className="flex items-center text-gray-600 hover:text-gray-900 font-medium py-2 px-4"
-          >
-            <ArrowLeft className="mr-2 h-5 w-5" />
-            Back
-          </button>
+      <div className="sticky bottom-0 bg-white py-4 border-t">
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+          <div className="flex space-x-2">
+            <button
+              type="button"
+              onClick={onBack}
+              className="flex items-center text-gray-600 hover:text-gray-900 font-medium py-2 px-4"
+            >
+              <ArrowLeft className="mr-2 h-5 w-5" />
+              Back
+            </button>
+            
+            <button
+              type="button"
+              onClick={onCancel}
+              className="text-gray-500 hover:text-gray-700 font-medium py-2 px-4 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+            >
+              Cancel
+            </button>
+          </div>
           
-          <button
-            type="button"
-            onClick={onCancel}
-            className="text-gray-500 hover:text-gray-700 font-medium py-2 px-4 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
-          >
-            Cancel
-          </button>
+          <div className="flex space-x-3 w-full sm:w-auto">
+            <button
+              type="button"
+              onClick={onNext}
+              className="flex items-center justify-center w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-6 rounded-lg transition-colors"
+            >
+              <CheckCircle className="mr-2 h-5 w-5" />
+              Complete
+            </button>
+            
+            <button
+              type="button"
+              onClick={onNext}
+              className="flex items-center justify-center w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-6 rounded-lg transition-colors"
+            >
+              Continue
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </button>
+          </div>
         </div>
         
-        <button
-          type="button"
-          onClick={onNext}
-          className="flex items-center bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-6 rounded-lg transition-colors"
-        >
-          Continue
-          <ArrowRight className="ml-2 h-5 w-5" />
-        </button>
+        <div className="mt-4 text-center text-sm text-gray-500">
+          <p>Space selection is optional. You can always join or leave spaces later.</p>
+        </div>
       </div>
     </div>
   )
