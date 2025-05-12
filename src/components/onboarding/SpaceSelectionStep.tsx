@@ -1,5 +1,5 @@
-import React from 'react'
-import { ArrowRight, ArrowLeft, Users, Plus, Check, X, CheckCircle } from 'lucide-react'
+import React, { useMemo } from 'react'
+import { ArrowRight, ArrowLeft, Users, Plus, Check, X } from 'lucide-react'
 
 interface SpaceSelectionStepProps {
   selectedSpaces: string[]
@@ -77,8 +77,8 @@ export const SpaceSelectionStep: React.FC<SpaceSelectionStepProps> = ({
   }
 
   return (
-    <div className="max-h-[80vh] overflow-y-auto">
-      <div className="sticky top-0 right-4 z-10 flex justify-end">
+    <div>
+      <div className="absolute top-4 right-4">
         <button 
           onClick={onCancel}
           className="text-gray-400 hover:text-gray-600 transition-colors"
@@ -90,7 +90,7 @@ export const SpaceSelectionStep: React.FC<SpaceSelectionStepProps> = ({
       
       <h2 className="text-2xl font-bold text-gray-900 mb-2">Join Community Spaces</h2>
       <p className="text-gray-600 mb-6">
-        Based on your interests, we've recommended some spaces you might enjoy. Join spaces to connect with like-minded people or skip this step.
+        Based on your interests, we've recommended some spaces you might enjoy. Join spaces to connect with like-minded people.
       </p>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
@@ -150,51 +150,34 @@ export const SpaceSelectionStep: React.FC<SpaceSelectionStepProps> = ({
         })}
       </div>
       
-      <div className="sticky bottom-0 bg-white py-4 border-t">
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-          <div className="flex space-x-2">
-            <button
-              type="button"
-              onClick={onBack}
-              className="flex items-center text-gray-600 hover:text-gray-900 font-medium py-2 px-4"
-            >
-              <ArrowLeft className="mr-2 h-5 w-5" />
-              Back
-            </button>
-            
-            <button
-              type="button"
-              onClick={onCancel}
-              className="text-gray-500 hover:text-gray-700 font-medium py-2 px-4 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
-            >
-              Cancel
-            </button>
-          </div>
+      <div className="flex justify-between">
+        <div className="flex space-x-2">
+          <button
+            type="button"
+            onClick={onBack}
+            className="flex items-center text-gray-600 hover:text-gray-900 font-medium py-2 px-4"
+          >
+            <ArrowLeft className="mr-2 h-5 w-5" />
+            Back
+          </button>
           
-          <div className="flex space-x-3 w-full sm:w-auto">
-            <button
-              type="button"
-              onClick={onNext}
-              className="flex items-center justify-center w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-6 rounded-lg transition-colors"
-            >
-              <CheckCircle className="mr-2 h-5 w-5" />
-              Complete
-            </button>
-            
-            <button
-              type="button"
-              onClick={onNext}
-              className="flex items-center justify-center w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-6 rounded-lg transition-colors"
-            >
-              Continue
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={onCancel}
+            className="text-gray-500 hover:text-gray-700 font-medium py-2 px-4 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+          >
+            Cancel
+          </button>
         </div>
         
-        <div className="mt-4 text-center text-sm text-gray-500">
-          <p>Space selection is optional. You can always join or leave spaces later.</p>
-        </div>
+        <button
+          type="button"
+          onClick={onNext}
+          className="flex items-center bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-6 rounded-lg transition-colors"
+        >
+          Continue
+          <ArrowRight className="ml-2 h-5 w-5" />
+        </button>
       </div>
     </div>
   )
