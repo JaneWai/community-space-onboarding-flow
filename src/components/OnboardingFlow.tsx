@@ -19,6 +19,7 @@ export const OnboardingFlow: React.FC<OnboardingFlowProps> = ({ onComplete, onCa
     bio: '',
     avatar: '',
     email: '',
+    github: '',
     twitter: '',
     telegram: '',
     slack: '',

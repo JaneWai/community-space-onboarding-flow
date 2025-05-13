@@ -93,61 +93,63 @@ export const SpaceSelectionStep: React.FC<SpaceSelectionStepProps> = ({
         Based on your interests, we've recommended some spaces you might enjoy. Join spaces to connect with like-minded people.
       </p>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-        {allSpaces.map((space) => {
-          const isSelected = selectedSpaces.includes(space.id)
-          
-          return (
-            <div 
-              key={space.id}
-              className={`border rounded-lg overflow-hidden transition-all ${
-                isSelected ? 'border-indigo-300 ring-2 ring-indigo-100' : 'border-gray-200 hover:border-gray-300'
-              }`}
-            >
-              <div className="h-32 overflow-hidden">
-                <img 
-                  src={space.image} 
-                  alt={space.name} 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              
-              <div className="p-4">
-                <h3 className="font-semibold text-gray-900 mb-1">{space.name}</h3>
-                <p className="text-gray-600 text-sm mb-3 line-clamp-2">{space.description}</p>
+      <div className="overflow-y-auto max-h-[400px] pr-2 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {allSpaces.map((space) => {
+            const isSelected = selectedSpaces.includes(space.id)
+            
+            return (
+              <div 
+                key={space.id}
+                className={`border rounded-lg overflow-hidden transition-all ${
+                  isSelected ? 'border-indigo-300 ring-2 ring-indigo-100' : 'border-gray-200 hover:border-gray-300'
+                }`}
+              >
+                <div className="h-32 overflow-hidden">
+                  <img 
+                    src={space.image} 
+                    alt={space.name} 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
                 
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center text-gray-500 text-sm">
-                    <Users className="h-4 w-4 mr-1" />
-                    <span>{space.members.toLocaleString()} members</span>
-                  </div>
+                <div className="p-4">
+                  <h3 className="font-semibold text-gray-900 mb-1">{space.name}</h3>
+                  <p className="text-gray-600 text-sm mb-3 line-clamp-2">{space.description}</p>
                   
-                  <button
-                    type="button"
-                    onClick={() => toggleSpace(space.id)}
-                    className={`flex items-center px-3 py-1 rounded-full text-sm font-medium ${
-                      isSelected 
-                        ? 'bg-indigo-100 text-indigo-700' 
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                    }`}
-                  >
-                    {isSelected ? (
-                      <>
-                        <Check className="h-4 w-4 mr-1" />
-                        Joined
-                      </>
-                    ) : (
-                      <>
-                        <Plus className="h-4 w-4 mr-1" />
-                        Join
-                      </>
-                    )}
-                  </button>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center text-gray-500 text-sm">
+                      <Users className="h-4 w-4 mr-1" />
+                      <span>{space.members.toLocaleString()} members</span>
+                    </div>
+                    
+                    <button
+                      type="button"
+                      onClick={() => toggleSpace(space.id)}
+                      className={`flex items-center px-3 py-1 rounded-full text-sm font-medium ${
+                        isSelected 
+                          ? 'bg-indigo-100 text-indigo-700' 
+                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      }`}
+                    >
+                      {isSelected ? (
+                        <>
+                          <Check className="h-4 w-4 mr-1" />
+                          Joined
+                        </>
+                      ) : (
+                        <>
+                          <Plus className="h-4 w-4 mr-1" />
+                          Join
+                        </>
+                      )}
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          )
-        })}
+            )
+          })}
+        </div>
       </div>
       
       <div className="flex justify-between">

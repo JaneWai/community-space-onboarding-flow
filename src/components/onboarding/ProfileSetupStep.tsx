@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { User, ArrowRight, ArrowLeft, Upload, X, Mail, Globe, Twitter, MessageCircle, Slack, MessageSquare, Linkedin } from 'lucide-react'
+import { User, ArrowRight, ArrowLeft, Upload, X, Mail, Globe, Twitter, MessageCircle, MessageSquare, Slack, Linkedin, Github } from 'lucide-react'
 
 interface ProfileSetupStepProps {
   userData: {
@@ -8,6 +8,7 @@ interface ProfileSetupStepProps {
     bio: string
     avatar: string
     email: string
+    github: string
     twitter: string
     telegram: string
     slack: string
@@ -115,7 +116,7 @@ export const ProfileSetupStep: React.FC<ProfileSetupStepProps> = ({
         </div>
         
         <div className="mb-4">
-          <label htmlFor="name" className="block text-gray-700 font-medium mb-2">Full Name</label>
+          <label htmlFor="name" className="block text-gray-700 font-medium mb-2">Full Name <span className="text-red-500">*</span></label>
           <input
             type="text"
             id="name"
@@ -125,12 +126,13 @@ export const ProfileSetupStep: React.FC<ProfileSetupStepProps> = ({
               errors.name ? 'border-red-500' : 'border-gray-300'
             }`}
             placeholder="Enter your full name"
+            required
           />
           {errors.name && <p className="mt-1 text-red-500 text-sm">{errors.name}</p>}
         </div>
         
         <div className="mb-4">
-          <label htmlFor="username" className="block text-gray-700 font-medium mb-2">Username</label>
+          <label htmlFor="username" className="block text-gray-700 font-medium mb-2">Username <span className="text-red-500">*</span></label>
           <div className="flex rounded-lg overflow-hidden border border-gray-300 focus-within:ring-2 focus-within:ring-indigo-500 focus-within:border-indigo-500">
             <span className="bg-gray-100 px-3 py-2 text-gray-500 border-r border-gray-300">@</span>
             <input
@@ -142,6 +144,7 @@ export const ProfileSetupStep: React.FC<ProfileSetupStepProps> = ({
                 errors.username ? 'border-red-500' : ''
               }`}
               placeholder="Choose a username"
+              required
             />
           </div>
           {errors.username && <p className="mt-1 text-red-500 text-sm">{errors.username}</p>}
@@ -184,6 +187,20 @@ export const ProfileSetupStep: React.FC<ProfileSetupStepProps> = ({
           <h3 className="text-gray-700 font-medium mb-4">Social Profiles <span className="text-gray-400 text-sm font-normal">(optional)</span></h3>
           
           <div className="space-y-4">
+            <div className="flex rounded-lg overflow-hidden border border-gray-300 focus-within:ring-2 focus-within:ring-indigo-500 focus-within:border-indigo-500">
+              <span className="bg-gray-100 px-3 py-2 text-gray-500 border-r border-gray-300">
+                <Github className="h-5 w-5" />
+              </span>
+              <input
+                type="text"
+                id="github"
+                value={userData.github}
+                onChange={(e) => updateUserData({ github: e.target.value })}
+                className="flex-1 px-4 py-2 focus:outline-none"
+                placeholder="GitHub username"
+              />
+            </div>
+            
             <div className="flex rounded-lg overflow-hidden border border-gray-300 focus-within:ring-2 focus-within:ring-indigo-500 focus-within:border-indigo-500">
               <span className="bg-gray-100 px-3 py-2 text-gray-500 border-r border-gray-300">
                 <Twitter className="h-5 w-5" />

@@ -4,7 +4,7 @@ import { Users, ArrowRight, X } from 'lucide-react'
 interface WelcomeStepProps {
   onNext: () => void
   onCancel: () => void
-  isFirstStep: boolean
+  isFirstStep?: boolean
 }
 
 export const WelcomeStep: React.FC<WelcomeStepProps> = ({ onNext, onCancel, isFirstStep }) => {
@@ -52,7 +52,7 @@ export const WelcomeStep: React.FC<WelcomeStepProps> = ({ onNext, onCancel, isFi
           onClick={onNext}
           className="flex items-center justify-center bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-6 rounded-lg transition-colors w-full"
         >
-          Get Started
+          Next
           <ArrowRight className="ml-2 h-5 w-5" />
         </button>
       </div>
